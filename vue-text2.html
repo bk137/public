@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+
+  <title>vue-test2</title>
+</head>
+<style>
+
+</style>
+<body>
+<div id='example-3'>
+ <!-- 当选中时，`picked` 为字符串 "a" -->
+<input type="radio" v-model="picked" value="a">
+
+<!-- `toggle` 为 true 或 false -->
+<input type="checkbox" v-model="toggle">
+
+<!-- 当选中第一个选项时，`selected` 为字符串 "abc" -->
+<select v-model="selected">
+  <option value="abc">ABC</option>
+</select>
+<input v-model.lazy.number="msg" type='number'>
+<test :test="msg">{{msg}}</test>  
+</div>
+
+<div id="box"  >
+      <h2>创建模态框（Modal）</h2>
+      <!-- 按钮触发模态框 -->
+      <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"  v-on:click="qrcode()" >开始演示模态框</button>
+      <!-- 模态框（Modal） -->
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h4 class="modal-title" id="myModalLabel">导出二维码</h4>
+                  </div>
+                  <div class="modal-body" align="center">
+                      <img v-bind:src="qcodeUrl" width="200" height="200" class="qcimg">
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                      <button type="button" class="btn btn-primary">提交更改</button>
+                  </div>
+              </div><!-- /.modal-content -->
+          </div><!-- /.modal -->
+      </div>
+ </div>
+</body>
+ <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+<script src="https://cdn.bootcss.com/qs/6.5.1/qs.min.js"></script>
+
+<script>
+Vue.component('test', {
+  // 在 JavaScript 中是 camelCase 的
+  props: ['test'],
+  template: '<h3>{{ test }}</h3>'
+});
+var vm = new Vue({
+  el: '#example-3',
+  data: {
+    toggle:'kj',
+    picked:'',
+    selected:'',
+    msg:5245
+  }
+});
+Vue.filter('Isawsl',function(v){
+  return v=='awsl'?'呵呵':'哈哈';
+})
+Vue.filter('format',function(value){
+     return value?true:false;      
+ });
+new Vue({
+   el:'#box',
+   data:{
+       list:[
+              {msg:"11",id:1},
+              {msg:"22",id:2},
+              {msg:"33",id:3}
+            ],
+        heihei:"awsl",    
+        qcodeUrl:"",
+    },
+    methods:{
+      qrcode:function(){
+        this.qcodeUrl='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564468775788&di=4e126ee49337620b218c6799d5dbad67&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201801%2F20%2F20180120123551_mE8UG.thumb.700_0.png';
+      },
+      
+    },
+        
+});          
+
+</script>
+</html>
